@@ -18,4 +18,15 @@ class Command(BaseCommand):
 		user.set_password('admin171717')
 		user.save()
 
+	# создание юзера
+		user = User.objects.create(
+			email='sidr@sky.pro',
+			first_name = 'sidr',
+			last_name = 'SkyPro',
+			is_staff = True,
+			is_superuser = True
+		)
+
+		user.set_password('sidr')
+		user.save()
 

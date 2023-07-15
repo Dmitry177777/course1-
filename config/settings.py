@@ -83,7 +83,7 @@ PostgreSQL_Key = os.getenv('PostgreSQL_Key')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'course',
+        'NAME': 'course1',
         'USER': 'postgres',
         'PASSWORD': PostgreSQL_Key,
         'HOST': '127.0.0.1',
