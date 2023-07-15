@@ -179,4 +179,5 @@ CACHES = {
 # Функция синхронизации выполняется каждую минуту
 CRONJOBS = [
     ('*****', 'main.Cronjob_script.task1'),
+    ('*****', 'main.Cronjob_script.send_email'),
 ]
