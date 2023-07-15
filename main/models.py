@@ -10,6 +10,7 @@ from pytils.translit import slugify
 # NULLABLE = {'blank':True, 'null': True}
 
 class Client(models.Model):
+    objects = None
     email = models.OneToOneField(User, on_delete=models.CASCADE, null=False, unique=True, verbose_name='почта_пользователя')
     client = models.CharField(max_length=150, verbose_name='ФИО')
     client_comment = models.CharField(max_length=350, verbose_name='Комментарий', **NULLABLE)
