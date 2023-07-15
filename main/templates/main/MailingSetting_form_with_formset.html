@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="col">
+     <form method="post" class="row">
+         <div class="col-6">
+                 <div class="card">
+                        <div class="card-header">
+                            Настройки рассылки
+                        </div>
+
+                         <div class="card-body">
+
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                            <input type="submit" class="btn btn-success" value="{% if object %}Сохранить{% else %}Создать{% endif %}" >
+
+                        </div>
+
+
+                    <div class="card-footer">
+                            <a href="{% url 'main:MailingSetting_list' %}" class = "btn btn-primary"> <<Назад</a>
+                    </div>
+                </div>
+            </div>
+
+         <div class="col-6">
+            <div class="card">
+                    <div class="card-header" >
+                        Логи рассылки
+                    </div>
+
+                    <div class="card-body">
+
+                         <table class="table">
+                             {{formset.management_form}}
+                             {% for form in formset.forms %}
+                                  <tr class="subject-form">
+                                      <div class="card-body">
+                                        {{form.as_p}}
+                                      </div>
+                                  </tr>
+
+                             {% endfor %}
+
+                             </table>
+                         </div>
+                </div>
+
+
+            </div>
+     </form>
+ </div>
+ {% endblock %}
