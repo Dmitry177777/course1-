@@ -1,5 +1,6 @@
 from datetime import timedelta
 #
+from django.conf import settings
 from django.core.mail import EmailMessage
 from main.models import MailingSetting, Message
 # import requests
@@ -30,7 +31,7 @@ from scheduler import job
 #     btc_price_ = f"BTC: {round(btc_price,2)} $"
 #     print(btc_price_)
 @job
-def send_email():
+def 1():
 
     message = Message.body_message
     email = EmailMessage(
@@ -41,8 +42,12 @@ def send_email():
     email.send()
     print(f"Письмо по адресу {MailingSetting.email} отправлено")
 
-if __name__ == '__send_email__':
-    send_email()
+
+send_email.delay()
+
+
+# if __name__ == '__send_email__':
+#     send_email()
 
 #
 # def send_email():
