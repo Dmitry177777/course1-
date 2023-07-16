@@ -1,6 +1,7 @@
 from datetime import date
 from users.models import User, NULLABLE
-
+import schedule
+from django.core.mail import EmailMessage
 from django.db import models
 from django.urls import reverse
 
@@ -66,7 +67,9 @@ class MailingLogs(models.Model):
     def __str__(self):
         return f'{self.log_time} : {self.status_mailing}'
 
-
+class IterRegistry(type):
+    def __iter__(cls):
+        return iter(cls._registry)
 
 
 class MailingSetting(models.Model):
@@ -75,6 +78,8 @@ class MailingSetting(models.Model):
     end_time = models.DateTimeField()
     status_mailing = models.BooleanField(default=False, verbose_name='Статус рассылки') # завершена, создана, запущена
     head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150,  default='сообщение', verbose_name='Тема сообщения')
+
+
 
 
 
