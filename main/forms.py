@@ -52,6 +52,8 @@ class MessageForm(FormStyleMixin, forms.ModelForm):
 
 class MailingSettingForm(FormStyleMixin, forms.ModelForm):
 
+
+
     class Meta:
         model = MailingSetting
         fields = '__all__'
