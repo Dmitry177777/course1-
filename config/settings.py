@@ -18,6 +18,16 @@ from dotenv import load_dotenv
 
 from django.conf.global_settings import LOGIN_URL
 
+
+########### django-tasks-scheduler ############
+
+SCHEDULER_CONFIG = {
+    'EXECUTIONS_IN_PAGE': 20,
+    'DEFAULT_RESULT_TTL': 500,
+    'DEFAULT_TIMEOUT': 300,  # 5 minutes
+    'SCHEDULER_INTERVAL': 10,  # 10 seconds
+}
+
 SCHEDULER_QUEUES = {
   'default': {
       'HOST': 'localhost',
@@ -62,6 +72,7 @@ RQ = {
   'DEFAULT_RESULT_TTL': 360,
   'DEFAULT_TIMEOUT': 60,
 }
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -222,6 +233,7 @@ CACHE_ENABLED = os.getenv('CACHE_ENABLED')
 CACHE_LOCATION = os.getenv('CACHE_LOCATION')
 
 
+############ redis ##############
 
 CACHES = {
     "default": {
@@ -232,7 +244,7 @@ CACHES = {
 
 
 # Функция синхронизации выполняется каждую минуту
-CRONJOBS = [
-    ('*****', 'main.cron.task1'),
-    ('*****', 'main.cron.send_email'),
-]
+# CRONJOBS = [
+#     ('*****', 'main.cron.task1'),
+#     ('*****', 'main.cron.send_email'),
+# ]
