@@ -1,11 +1,19 @@
+from datetime import timedelta
+
 from django.core.mail import EmailMessage
-from django.db.models.functions import datetime
+from django.utils.datetime_safe import datetime
+from scheduler import job
+
 
 from main.models import Client, MailingSetting, Blog, Message, MailingLogs
 from django.template.loader import render_to_string
 
+
+
+
 # Задача по времени
-def task1():
+@job
+def task_job():
 
     try:
         loca_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -14,6 +22,7 @@ def task1():
     except Exception as e:
         print('Произошла ошибка, сообщение об ошибке:', e)
 
+# long_running_func.delay()  # Enqueue function in "default" queue
 
 # def send_email(self, MailingSetting, ):
 #         # current_site = get_current_site(request)
