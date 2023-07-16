@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.cache import cache_page
 
 from .views import *
@@ -15,6 +15,9 @@ app_name = MainConfig.name
 
 urlpatterns = [
     path('', index.as_view(), name="index"),
+
+
+    path('scheduler/', include('scheduler.urls')),
 
     path('MailingSetting/', MailingSettingListView.as_view(), name='MailingSetting_list'),
     path('MailingSetting_item/<int:pk>/', cache_page(60)(MailingSettingDetailView.as_view()), name='MailingSetting_item'),

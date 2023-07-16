@@ -15,17 +15,17 @@ def task1():
         print('Произошла ошибка, сообщение об ошибке:', e)
 
 
-def send_email(self, MailingSetting, ):
-        # current_site = get_current_site(request)
-
-        for mailS in MailingSetting:
-
-            if mailS.start_time < datetime.now() and datetime.now()< mailS.end_time:
-
-                message = Message.body_message
-                email = EmailMessage(
-                    MailingSetting.head_message,
-                    message,
-                    to=[MailingSetting.email],
-                )
-                email.send()
+# def send_email(self, MailingSetting, ):
+#         # current_site = get_current_site(request)
+#
+#         for mailS in MailingSetting:
+#
+#             if mailS.start_time < datetime.now() and datetime.now()< mailS.end_time:
+#
+#                 message = Message.body_message
+#                 email = EmailMessage(
+#                     MailingSetting.head_message,
+#                     message,
+#                     to=[MailingSetting.email],
+#                 )
+#                 email.send()

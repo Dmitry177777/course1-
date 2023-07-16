@@ -11,9 +11,57 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.conf import settings
+from django.template.backends import django
 from dotenv import load_dotenv
 
 from django.conf.global_settings import LOGIN_URL
+
+SCHEDULER_QUEUES = {
+  'default': {
+      'HOST': 'localhost',
+      'PORT': 6379,
+     'DB': 0,
+      'USERNAME': 'some-user',
+      'PASSWORD': 'some-password',
+      'DEFAULT_TIMEOUT': 360,
+      'REDIS_CLIENT_KWARGS': {    # Eventual additional Redis connection arguments
+          'ssl_cert_reqs': None,
+      },
+  },
+  'with-sentinel': {
+      'SENTINELS': [('localhost', 26736), ('localhost', 26737)],
+      'MASTER_NAME': 'redismaster',
+      'DB': 0,
+      # Redis username/password
+      'USERNAME': 'redis-user',
+      'PASSWORD': 'secret',
+      'SOCKET_TIMEOUT': 0.3,
+      'CONNECTION_KWARGS': {  # Eventual additional Redis connection arguments
+          'ssl': True
+      },
+      'SENTINEL_KWARGS': {    # Eventual Sentinel connection arguments
+          # If Sentinel also has auth, username/password can be passed here
+          'username': 'sentinel-user',
+          'password': 'secret',
+      },
+  },
+  'high': {
+      'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'), # If you're on Heroku
+      'DEFAULT_TIMEOUT': 500,
+  },
+  'low': {
+      'HOST': 'localhost',
+      'PORT': 6379,
+      'DB': 0,
+  }
+}
+
+RQ = {
+  'DEFAULT_RESULT_TTL': 360,
+  'DEFAULT_TIMEOUT': 60,
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +88,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_crontab',
+    # 'django_crontab',
+    'scheduler',
 
     'main',
     'users',
@@ -120,6 +169,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -143,6 +197,7 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
 
 
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -178,6 +233,6 @@ CACHES = {
 
 # Функция синхронизации выполняется каждую минуту
 CRONJOBS = [
-    ('*****', 'main.Cronjob_script.task1'),
-    ('*****', 'main.Cronjob_script.send_email'),
+    ('*****', 'main.cron.task1'),
+    ('*****', 'main.cron.send_email'),
 ]
