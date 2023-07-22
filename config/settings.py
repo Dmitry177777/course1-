@@ -182,3 +182,5 @@ CRONJOBS = [
     ('* * * * *', 'main.cron.send_email'),
     ('* * * * *', 'main.cron.my_cron_job'),
 ]
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
