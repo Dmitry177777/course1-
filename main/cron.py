@@ -1,20 +1,22 @@
 from datetime import datetime
 
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.db.models.functions import datetime
+from django.http import request
 
 from main.models import Client, MailingSetting, Blog, Message, MailingLogs
 from django.template.loader import render_to_string
 
 #Задача по времени
-def task1():
-
-    try:
-        loca_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print('Местное время:' + str(loca_time))
-
-    except Exception as e:
-        print('Произошла ошибка, сообщение об ошибке:', e)
+# def task1():
+#
+#     try:
+#         loca_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#         print('Местное время:' + str(loca_time))
+#
+#     except Exception as e:
+#         print('Произошла ошибка, сообщение об ошибке:', e)
 
 
 def send_email(self, MailingSetting, ):
