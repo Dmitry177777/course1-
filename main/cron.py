@@ -6,7 +6,7 @@ from django.db.models.functions import datetime
 from main.models import Client, MailingSetting, Blog, Message, MailingLogs
 from django.template.loader import render_to_string
 
-# Задача по времени
+#Задача по времени
 def task1():
 
     try:
@@ -32,6 +32,3 @@ def send_email(self, MailingSetting, ):
                 )
                 email.send()
 
-def my_cron_job():
-    # your functionality goes here
-    print('1')
