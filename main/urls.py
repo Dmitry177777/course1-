@@ -17,7 +17,7 @@ urlpatterns = [
     path('', index.as_view(), name="index"),
 
 
-    path('scheduler/', include('scheduler.urls')),
+    # path('scheduler/', include('scheduler.urls')),
 
     path('MailingSetting/', MailingSettingListView.as_view(), name='MailingSetting_list'),
     path('MailingSetting_item/<int:pk>/', cache_page(60)(MailingSettingDetailView.as_view()), name='MailingSetting_item'),
