@@ -9,6 +9,7 @@ from main.models import Client, MailingSetting, Blog, Message, MailingLogs
 from django.template.loader import render_to_string
 
 #Задача по времени
+
 def task1():
 
     try:
