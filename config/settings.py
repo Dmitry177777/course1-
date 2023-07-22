@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-PostgreSQL_Key = '171717' #os.getenv('PostgreSQL_Key')
+PostgreSQL_Key = os.getenv('PostgreSQL_Key')
 
 DATABASES = {
     'default': {
