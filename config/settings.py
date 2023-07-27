@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_crontab',
+
 
     'main',
     'users',
@@ -181,8 +183,8 @@ CACHES = {
 
 # Функция синхронизации выполняется каждую минуту
 CRONJOBS = [
-    ('* * * * *', 'main.cron.my_scheduled_job'),
-    ('* * * * *', 'main.cron.task1'),
+    # ('* * * * *', 'main.cron.my_scheduled_job'),
+    ('* * * * *', 'main.cron.send_mail_'),
 
 ]
 

@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.sites import requests
 from django.core.mail import  send_mail
 from django.db.models.functions import datetime
+from rest_framework import request
 
 from config import settings
 from main.models import MailingLogs
@@ -12,7 +13,7 @@ from main.models import MailingLogs
 
 
 
-def task1(MailingSetting):
+def send_mail_(MailingSetting):
 
 
     MailingLogs.log_time = datetime.now()
@@ -33,7 +34,7 @@ def task1(MailingSetting):
             MailingLogs.head_message = "Here is the message."
             MailingLogs.log_time = datetime.now()
             MailingLogs.status_mailing ='попытка отправки письма'
-            MailingLogs.get_server_mail=''
+            MailingLogs.get_server_mail = request.send_mail
             MailingLogs.save()
 
 def my_scheduled_job():
