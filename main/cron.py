@@ -6,36 +6,37 @@ from django.db.models.functions import datetime
 from rest_framework import request
 
 from config import settings
-from main.models import MailingLogs
+from main.models import MailingLogs, MailingSetting
 
 
 #Задача по времени
 
 
 
-def send_mail_(MailingSetting):
+def send_mail_():
 
 
-    MailingLogs.log_time = datetime.now()
-    MailingLogs.status_mailing = 'проверка заданий'
-    MailingLogs.save()
+    # MailingLogs.log_time = datetime.now()
+    # MailingLogs.status_mailing = 'проверка заданий'
+    # MailingLogs.save()
 
-    for mailS in MailingSetting:
+    for mailS in MailingSetting.objects.all():
+        print(mailS)
 
         if mailS.start_time < datetime.now() and datetime.now() < mailS.end_time:
-            send_mail(
+            response = send_mail(
                 "Subject here",
                 "Here is the message.",
                 settings.EMAIL_HOST_USER,
-                [MailingSetting.email],
+                [mailS.email],
             fail_silently = False,
             )
-            MailingLogs.email = MailingSetting.email
-            MailingLogs.head_message = "Here is the message."
-            MailingLogs.log_time = datetime.now()
-            MailingLogs.status_mailing ='попытка отправки письма'
-            MailingLogs.get_server_mail = request.send_mail
-            MailingLogs.save()
+            # MailingLogs.email = MailingSetting.email
+            # MailingLogs.head_message = "Here is the message."
+            # MailingLogs.log_time = datetime.now()
+            # MailingLogs.status_mailing ='попытка отправки письма'
+            MailingLogs.get_server_mail = response
+            # MailingLogs.save()
 
 def my_scheduled_job():
 

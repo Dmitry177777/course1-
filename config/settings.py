@@ -183,7 +183,7 @@ CACHES = {
 
 # Функция синхронизации выполняется каждую минуту
 CRONJOBS = [
-    # ('* * * * *', 'main.cron.my_scheduled_job'),
+    ('* * * * *', 'main.cron.my_scheduled_job'),
     ('* * * * *', 'main.cron.send_mail_'),
 
 ]
