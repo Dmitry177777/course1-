@@ -54,8 +54,7 @@ class Message(models.Model):
 
 class MailingLogs(models.Model):
     email = models.OneToOneField(Client, on_delete=models.CASCADE, null=False, verbose_name='почта_пользователя')
-    head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150, default='сообщение',
-                                        verbose_name='Тема сообщения')
+    head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150, verbose_name='Тема сообщения')
     log_time = models.DateTimeField() # дата и время последней попытки
     status_mailing = models.BooleanField(default=False, verbose_name='Статус попытки')  # завершена, создана, запущена
     get_server_mail = models.CharField(max_length=150, verbose_name='Ответ сервера', **NULLABLE)

@@ -1,5 +1,9 @@
-from django.core.mail import send_mail
+from main.cron import send_mail_
 from django.core.management import BaseCommand
 
 
-send_mail()
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        print('Принудительный запуск рассылки')
+        send_mail_()
+        print('Рассылка завершена')

@@ -15,27 +15,27 @@ from main.models import MailingLogs, MailingSetting
 
 def send_mail_():
 
-
-    # MailingLogs.log_time = datetime.now()
-    # MailingLogs.status_mailing = 'проверка заданий'
-    # MailingLogs.save()
+    log_m = MailingLogs()
+    log_m.log_time = datetime.datetime.now()
+    log_m.status_mailing = False
+    log_m.save()
 
     for mailS in MailingSetting.objects.all():
         print(mailS)
 
-        if mailS.start_time < datetime.now() and datetime.now() < mailS.end_time:
-            response = send_mail(
-                "Subject here",
-                "Here is the message.",
-                settings.EMAIL_HOST_USER,
-                [mailS.email],
-            fail_silently = False,
-            )
+        # if mailS.start_time < datetime.now() and datetime.now() < mailS.end_time:
+        response = send_mail(
+            "Subject here",
+            "Here is the message.",
+            settings.EMAIL_HOST_USER,
+            [mailS.email],
+        fail_silently = False,
+        )
             # MailingLogs.email = MailingSetting.email
             # MailingLogs.head_message = "Here is the message."
             # MailingLogs.log_time = datetime.now()
             # MailingLogs.status_mailing ='попытка отправки письма'
-            MailingLogs.get_server_mail = response
+            # MailingLogs.get_server_mail = response
             # MailingLogs.save()
 
 def my_scheduled_job():
