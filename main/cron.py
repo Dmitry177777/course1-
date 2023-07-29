@@ -6,19 +6,19 @@ from django.db.models.functions import datetime
 from rest_framework import request
 
 from config import settings
-from main.models import MailingLogs, MailingSetting
-
+from main.models import MailingLogs, MailingSetting, Client
+from users.models import User
 
 #Задача по времени
 
 
 
 def send_mail_():
-
-    log_m = MailingLogs()
-    log_m.log_time = datetime.datetime.now()
-    log_m.status_mailing = False
-    log_m.save()
+    user_m=User.objects.get(pk=1)
+    client_m, created=Client.objects.get_or_create(email=user_m)
+    print (client_m)
+    # log_m = MailingLogs.objects.create(email=client_m[1], log_time=datetime.datetime.now(), status_mailing=False)
+    # log_m.save()
 
     for mailS in MailingSetting.objects.all():
         print(mailS)
@@ -31,12 +31,12 @@ def send_mail_():
             [mailS.email],
         fail_silently = False,
         )
-            # MailingLogs.email = MailingSetting.email
-            # MailingLogs.head_message = "Here is the message."
-            # MailingLogs.log_time = datetime.now()
-            # MailingLogs.status_mailing ='попытка отправки письма'
-            # MailingLogs.get_server_mail = response
-            # MailingLogs.save()
+        log_m.email = MailingSetting.email
+        log_m.head_message = "Here is the message."
+        log_m.log_time = datetime.now()
+        log_m.status_mailing = True
+        log_m.get_server_mail = response
+        log_m.save()
 
 def my_scheduled_job():
 

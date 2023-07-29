@@ -27,7 +27,7 @@ class index(LoginRequiredMixin, ListView):
     # Метод переопределяет представление и выводит только клиентов с атрибутом (is_active=True)
     def get_queryset(self):
         queryset = super().get_queryset()
-        # queryset = queryset.filter(status_mailing=True)
+        queryset = queryset.filter(status_mailing=True)
         return queryset[:6]
 
 class MailingSettingListView(LoginRequiredMixin, ListView):
@@ -39,7 +39,7 @@ class MailingSettingListView(LoginRequiredMixin, ListView):
     # Метод переопределяет представление и выводит только продукты с атрибутом is_active=True)
     def get_queryset(self):
         queryset = super().get_queryset()
-        # queryset = queryset.filter(status_mailing=True)
+        queryset = queryset.filter(status_mailing=True)
         return queryset
 
 
