@@ -18,7 +18,7 @@ class Client(models.Model):
     is_active = models.BooleanField(default=True, verbose_name='Активный клиент')
 
     def __str__(self):
-        return f'{self.email} : {self.client} : {self.client} '
+        return f'{self.email}  '
 
 
 # функция переопределяет удаление и не удаляет объект а переводит флаг is_active = False
@@ -46,15 +46,17 @@ class Message(models.Model):
 
 
     def __str__(self):
-        return f'{self.email} : {self.head_message} '
+        return f'{self.head_message}'
 
     class Meta:
         verbose_name = 'Сообщение'
         verbose_name_plural = 'Сообщения'
 
 class MailingLogs(models.Model):
-    email = models.OneToOneField(Client, on_delete=models.CASCADE, null=False, primary_key = True, verbose_name='почта_пользователя') #
-    head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150, verbose_name='Тема сообщения')
+
+    id = models.BigAutoField(primary_key=True, default =7)
+    email = models.EmailField(verbose_name='почта')
+    head_message = models.CharField(max_length=150, default=7, verbose_name='Тема сообщения')
     log_time = models.DateTimeField() # дата и время последней попытки
     status_mailing = models.BooleanField(default=False, verbose_name='Статус попытки')  # завершена, создана, запущена
     get_server_mail = models.CharField(max_length=150, verbose_name='Ответ сервера', **NULLABLE)

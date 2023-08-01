@@ -3,37 +3,49 @@ from datetime import datetime
 from django.contrib.sites import requests
 from django.core.mail import  send_mail
 from django.db.models.functions import datetime
-from rest_framework import request
+from django.http import request
+
+# from rest_framework import request
 
 from config import settings
-from main.models import MailingLogs, MailingSetting, Client
+from main.models import MailingLogs, MailingSetting, Client, Message
 from users.models import User
+import pytz
 
 #Задача по времени
 
 
 
 def send_mail_():
-    user_m=User.objects.get(pk=1)
-    client_m, created=Client.objects.get_or_create(email=user_m)
-    print (client_m)
-    # log_m = MailingLogs.objects.create(email=client_m[1], log_time=datetime.datetime.now(), status_mailing=False)
-    # log_m.save()
 
-    for mailS in MailingSetting.objects.all():
-        print(mailS)
+    for mailSet_m in MailingSetting.objects.all():
+        print(mailSet_m.email)
 
-        # if mailS.start_time < datetime.now() and datetime.now() < mailS.end_time:
+        client_m = Client.objects.get(id=mailSet_m.email_id)
+        user_m =User.objects.get(id=client_m.email_id)
+        print(f"{user_m.email} - {user_m.password} - {user_m.pk}")
+        print(mailSet_m.head_message)
+        message_m=Message.objects.get(id=mailSet_m.email_id)
+        print(message_m.body_message)
+
+        now_w=datetime.datetime.now().replace(tzinfo=pytz.utc)
+        start_time = mailSet_m.start_time.replace(tzinfo=pytz.utc)
+        end_time = mailSet_m.end_time.replace(tzinfo=pytz.utc)
+
+        # if start_time <= now_w <= end_time:
         response = send_mail(
-            "Subject here",
-            "Here is the message.",
+            mailSet_m.head_message,
+            message_m.body_message,
             settings.EMAIL_HOST_USER,
-            [mailS.email],
+            [mailSet_m.email],
         fail_silently = False,
         )
-        log_m.email = MailingSetting.email
-        log_m.head_message = "Here is the message."
-        log_m.log_time = datetime.now()
+
+
+        log_m = MailingLogs()
+        log_m.email = mailSet_m.email
+        log_m.head_message = mailSet_m.head_message
+        log_m.log_time = datetime.datetime.now()
         log_m.status_mailing = True
         log_m.get_server_mail = response
         log_m.save()
