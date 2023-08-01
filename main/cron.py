@@ -33,22 +33,22 @@ def send_mail_():
         end_time = mailSet_m.end_time.replace(tzinfo=pytz.utc)
 
         if start_time <= now_w <= end_time:
-        response = send_mail(
-            mailSet_m.head_message,
-            message_m.body_message,
-            settings.EMAIL_HOST_USER,
-            [mailSet_m.email],
-        fail_silently = False,
-        )
+            response = send_mail(
+                mailSet_m.head_message,
+                message_m.body_message,
+                settings.EMAIL_HOST_USER,
+                [mailSet_m.email],
+            fail_silently = False,
+            )
 
 
-        log_m = MailingLogs()
-        log_m.email = mailSet_m.email
-        log_m.head_message = mailSet_m.head_message
-        log_m.log_time = datetime.datetime.now()
-        log_m.status_mailing = True
-        log_m.get_server_mail = response
-        log_m.save()
+            log_m = MailingLogs()
+            log_m.email = mailSet_m.email
+            log_m.head_message = mailSet_m.head_message
+            log_m.log_time = datetime.datetime.now()
+            log_m.status_mailing = True
+            log_m.get_server_mail = response
+            log_m.save()
 
 def my_scheduled_job():
 
