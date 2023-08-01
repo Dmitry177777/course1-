@@ -32,7 +32,7 @@ def send_mail_():
         start_time = mailSet_m.start_time.replace(tzinfo=pytz.utc)
         end_time = mailSet_m.end_time.replace(tzinfo=pytz.utc)
 
-        # if start_time <= now_w <= end_time:
+        if start_time <= now_w <= end_time:
         response = send_mail(
             mailSet_m.head_message,
             message_m.body_message,
