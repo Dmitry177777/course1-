@@ -6,6 +6,12 @@ from users.models import User
 class Command(BaseCommand):
 	def handle (self, *args, **options):
 
+
+		# очистка модели User
+		records = User.objects.all()
+		records.delete()
+
+
 		# создание суперюзера
 		user = User.objects.create(
 			email='admin@sky.pro',
@@ -20,51 +26,28 @@ class Command(BaseCommand):
 		user.save()
 
 		user = User.objects.create(
-				email='user1@sky.pro',
-				first_name = 'user1',
-				last_name = 'SkyPro',
+				email='k1779@mail.ry',
+				first_name = 'userMail',
+				last_name = 'mailRu',
 				is_staff = True,
 				is_superuser = False,
 				is_active = True
 			)
 
-		user.set_password('user')
+		user.set_password('userMail')
 		user.save()
 
 
 		user = User.objects.create(
-			email='user2@sky.pro',
-			first_name='user2',
-			last_name='SkyPro',
+			email='k17911971@yandex.ru',
+			first_name='userYandex',
+			last_name='YandexRu',
 			is_staff=True,
 			is_superuser=False,
 			is_active=True
 		)
 
-		user.set_password('user')
+		user.set_password('userYandex')
 		user.save()
 
-		user = User.objects.create(
-			email='user3@sky.pro',
-			first_name='user3',
-			last_name='SkyPro',
-			is_staff=True,
-			is_superuser=False,
-			is_active=True
-		)
-
-		user.set_password('user')
-		user.save()
-
-		user = User.objects.create(
-			email='user4@sky.pro',
-			first_name='user4',
-			last_name='SkyPro',
-			is_staff=True,
-			is_superuser=False,
-			is_active=True
-		)
-
-		user.set_password('user')
-		user.save()
 
