@@ -11,6 +11,10 @@ class Command(BaseCommand):
 		records = User.objects.all()
 		records.delete()
 
+		# очистка модели Client
+		records = Client.objects.all()
+		records.delete()
+
 
 		# создание суперюзера
 		user = User.objects.create(
@@ -25,8 +29,11 @@ class Command(BaseCommand):
 		user.set_password('admin171717')
 		user.save()
 
+
+
+
 		user = User.objects.create(
-				email='k1779@mail.ry',
+				email='k1779@mail.ru',
 				first_name = 'userMail',
 				last_name = 'mailRu',
 				is_staff = True,
@@ -37,6 +44,14 @@ class Command(BaseCommand):
 		user.set_password('userMail')
 		user.save()
 
+		# client = Client.objects.create(
+		# 	email=user.email,
+		# 	client=user.first_name,
+		# 	client_comment=user.last_name,
+		# 	is_active=user.is_active
+		# )
+		#
+		# client.save()
 
 		user = User.objects.create(
 			email='k17911971@yandex.ru',
@@ -50,4 +65,11 @@ class Command(BaseCommand):
 		user.set_password('userYandex')
 		user.save()
 
-
+		# client = Client.objects.create(
+		# 	email=user.email,
+		# 	client=user.first_name,
+		# 	client_comment=user.last_name,
+		# 	is_active=user.is_active
+		# )
+		#
+		# client.save()
