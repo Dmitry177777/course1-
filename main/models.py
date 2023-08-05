@@ -54,7 +54,7 @@ class Message(models.Model):
 
 class MailingLogs(models.Model):
 
-    id = models.BigAutoField(primary_key=True, default =7)
+    id = models.BigAutoField(primary_key=True)
     email = models.EmailField(verbose_name='почта')
     head_message = models.CharField(max_length=150, default=7, verbose_name='Тема сообщения')
     log_time = models.DateTimeField() # дата и время последней попытки
