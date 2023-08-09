@@ -20,7 +20,7 @@ class ClientForm(FormStyleMixin, forms.ModelForm):
 
 
 
-    def clean_product_name (self):
+    def clean_email (self):
         cleaned_data = self.cleaned_data['email']
         for i in exclusion_list:
             if i.lower() in cleaned_data.lower():
@@ -28,7 +28,7 @@ class ClientForm(FormStyleMixin, forms.ModelForm):
 
         return cleaned_data
 
-    def clean_description(self):
+    def clean_client(self):
         cleaned_data = self.cleaned_data['client']
         for i in exclusion_list:
             if i.lower() in cleaned_data.lower():

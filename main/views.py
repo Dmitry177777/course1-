@@ -154,7 +154,7 @@ class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Client
     template_name = 'main\client_form_with_formset.html'
     permission_required = "main.add_client"
-    # fields = ('product_category', 'product_name', 'description', 'product_price',)
+
     form_class = ClientForm
     success_url = reverse_lazy('main:client_list')
 
@@ -180,7 +180,7 @@ class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Client
     template_name = 'main\client_form_with_formset.html'
     permission_required = "main.change_client"
-    # fields = ('product_category', 'product_name', 'description', 'product_price',)
+
     form_class = ClientForm
     success_url = reverse_lazy('main:client_list')
 
