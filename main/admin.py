@@ -21,14 +21,14 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(MailingSetting)
 class MailingSettingAdmin(admin.ModelAdmin):
-    list_display = ('email', 'start_time','end_time', 'status_mailing', )
+    list_display = ('id', 'start_time','end_time', 'status_mailing', )
     search_fields = ('email', 'start_time','end_time',)
     list_filter = ('status_mailing', )
 
 @admin.register(MailingLogs)
 class MailingLogsAdmin(admin.ModelAdmin):
-    list_display = ('email', 'log_time','status_mailing', 'get_server_mail', )
-    search_fields = ('email', 'log_time','status_mailing',)
+    list_display = ('email_id', 'log_time','status_mailing', 'get_server_mail', )
+    search_fields = ('email_id', 'log_time','status_mailing',)
     list_filter = ('get_server_mail', )
 
 @admin.register(Blog)

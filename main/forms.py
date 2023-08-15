@@ -20,13 +20,13 @@ class ClientForm(FormStyleMixin, forms.ModelForm):
 
 
 
-    def clean_email (self):
-        cleaned_data = self.cleaned_data['email']
-        for i in exclusion_list:
-            if i.lower() in cleaned_data.lower():
-                raise forms.ValidationError('Недопустимые слова в наименовании: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар')
-
-        return cleaned_data
+    # def clean_email (self):
+    #     cleaned_data = self.cleaned_data['email']
+    #     for i in exclusion_list:
+    #         if i.lower() in cleaned_data.lower():
+    #             raise forms.ValidationError('Недопустимые слова в наименовании: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар')
+    #
+    #     return cleaned_data
 
     def clean_client(self):
         cleaned_data = self.cleaned_data['client']
@@ -60,7 +60,7 @@ class MailingSettingForm(FormStyleMixin, forms.ModelForm):
 
 
     def clean_product_name (self):
-        cleaned_data = self.cleaned_data['email_id']
+        cleaned_data = self.cleaned_data['id']
         for i in exclusion_list:
             if i.lower() in cleaned_data.lower():
                 raise forms.ValidationError('Недопустимые слова в наименовании: казино, криптовалюта, крипта, биржа, дешево, бесплатно, обман, полиция, радар')

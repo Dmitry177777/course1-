@@ -48,7 +48,7 @@ class MailingSettingDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['title'] = context_data['object'].email_id
+        context_data['title'] = context_data['object'].id
 
         return context_data
 
@@ -193,7 +193,7 @@ class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         else:
             if self.request.user.is_superuser or self.object.email == self.request.user.email: # проверка пользователя на автора или суперюзера
                 context_data = super().get_context_data(**kwargs)
-                MessageFormset = inlineformset_factory(Client, MailingSetting, form=MailingSettingForm, extra=1)
+                MessageFormset = inlineformset_factory(Client, MailingSetting, form=MailingSettingForm, extra=2)
                 if self.request.method == 'POST':
                     context_data['formset'] = MessageFormset(self.request.POST, instance=self.object) # Обработка и сохранение POST запроса если он есть
                 else:

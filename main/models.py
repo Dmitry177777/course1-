@@ -53,7 +53,7 @@ class Message(models.Model):
         verbose_name_plural = 'Сообщения'
 
 class MailingSetting(models.Model):
-    email = models.ManyToManyField(Client, on_delete=models.CASCADE, null=False,  verbose_name='почта_пользователя')
+    email = models.ManyToManyField(Client,  verbose_name='почта_пользователя') #on_delete=models.CASCADE,
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     status_mailing = models.BooleanField(default=False, verbose_name='Статус рассылки') # завершена, создана, запущена
@@ -72,7 +72,7 @@ class MailingSetting(models.Model):
 class MailingLogs(models.Model):
 
     id = models.BigAutoField(primary_key=True)
-    email = models.ForeignKey (MailingSetting, verbose_name='почта')
+    email = models.ForeignKey(MailingSetting, on_delete=models.CASCADE, verbose_name='почта')
     head_message = models.CharField(max_length=150, default=7, verbose_name='Тема сообщения')
     log_time = models.DateTimeField() # дата и время последней попытки
     status_mailing = models.BooleanField(default=False, verbose_name='Статус попытки')  # завершена, создана, запущена
