@@ -48,7 +48,7 @@ class MailingSettingDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['title'] = context_data['object'].email
+        context_data['title'] = context_data['object'].email_id
 
         return context_data
 

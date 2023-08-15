@@ -19,11 +19,11 @@ urlpatterns = [
 
     # path('scheduler/', include('scheduler.urls')),
 
-    path('MailingSetting/', MailingSettingListView.as_view(), name='MailingSetting_list'),
-    path('MailingSetting_item/<int:pk>/', cache_page(60)(MailingSettingDetailView.as_view()), name='MailingSetting_item'),
-    path('MailingSetting/create/', MailingSettingCreateView.as_view(), name='MailingSetting_create'),
-    path('MailingSetting/update/<int:pk>/', MailingSettingUpdateView.as_view(), name='MailingSetting_update'),
-    path('MailingSetting/delete/<int:pk>/', MailingSettingDeleteView.as_view(), name='MailingSetting_delete'),
+    path('mailingSetting/', MailingSettingListView.as_view(), name='MailingSetting_list'),
+    path('mailingSetting_item/<int:pk>/', cache_page(60)(MailingSettingDetailView.as_view()), name='MailingSetting_item'),
+    path('mailingSetting/create/', MailingSettingCreateView.as_view(), name='MailingSetting_create'),
+    path('mailingSetting/update/<int:pk>/', MailingSettingUpdateView.as_view(), name='MailingSetting_update'),
+    path('mailingSetting/delete/<int:pk>/', MailingSettingDeleteView.as_view(), name='MailingSetting_delete'),
 
 
 
