@@ -55,11 +55,11 @@ class MailingSettingDetailView(LoginRequiredMixin, DetailView):
 
 class MailingSettingCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = MailingSetting
-    template_name = 'main\MailingSetting_form_with_formset.html'
+    template_name = 'main/mailingsetting_form_with_formset.html'
     permission_required = "main.add_MailingSetting"
 
     form_class = MailingSettingForm
-    success_url = reverse_lazy('main:client_list')
+    success_url = reverse_lazy('main:MailingSetting_list')
 
 
 
@@ -81,7 +81,7 @@ class MailingSettingCreateView(LoginRequiredMixin, PermissionRequiredMixin, Crea
 
 class MailingSettingUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = MailingSetting
-    template_name = 'main\MailingSetting_form_with_formset.html'
+    template_name = 'main/mailingsetting_form_with_formset.html'
     permission_required = "main.change_MailingSetting"
     # fields = ('product_category', 'product_name', 'description', 'product_price',)
     form_class = MailingSettingForm
@@ -94,13 +94,13 @@ class MailingSettingUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Upda
         else:
             if self.request.user.is_superuser or self.object.email == self.request.user.email:  # проверка пользователя на автора или суперюзера
                 context_data = super().get_context_data(**kwargs)
-                MailingLogsFormset = inlineformset_factory(MailingSetting, MailingLogs, form=MailingLogsForm, extra=1)
-                if self.request.method == 'POST':
-                    context_data['formset'] = MailingLogsFormset(self.request.POST,
-                                                             instance=self.object)  # Обработка и сохранение POST запроса если он есть
-                else:
-                    context_data['formset'] = MailingLogsFormset(instance=self.object)
-                    # Обработка ошибки не авторизованных пользователей
+                # MailingLogsFormset = inlineformset_factory(MailingSetting, MailingLogs, form=MailingLogsForm, extra=1)
+                # if self.request.method == 'POST':
+                #     context_data['formset'] = MailingLogsFormset(self.request.POST,
+                #                                              instance=self.object)  # Обработка и сохранение POST запроса если он есть
+                # else:
+                #     context_data['formset'] = MailingLogsFormset(instance=self.object)
+                #     # Обработка ошибки не авторизованных пользователей
 
             else:
                 raise BaseException("Вы не автор. Вы не администратор.")
@@ -152,7 +152,7 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
 
 class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Client
-    template_name = 'main\client_form_with_formset.html'
+    template_name = 'main/client_form_with_formset.html'
     permission_required = "main.add_client"
 
     form_class = ClientForm
@@ -178,7 +178,7 @@ class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Client
-    template_name = 'main\client_form_with_formset.html'
+    template_name = 'main/client_form_with_formset.html'
     permission_required = "main.change_client"
 
     form_class = ClientForm
@@ -262,13 +262,13 @@ class BlogDetailView(LoginRequiredMixin, DetailView):
         return self.render_to_response(context)
 
 
-class BlogCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class BlogCreateView(LoginRequiredMixin,  CreateView):
     model = Blog
     fields = ('message_heading', 'message_content', 'message_preview', 'is_publication',)
     success_url = reverse_lazy('main:blog_list')
 
 
-class BlogUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class BlogUpdateView(LoginRequiredMixin,  UpdateView):
     model = Blog
     fields = ('message_heading', 'message_content', 'message_preview', 'is_publication',)
 
@@ -277,7 +277,7 @@ class BlogUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return reverse_lazy('main:blog_update', kwargs={'pk': self.object.pk})
 
 
-class BlogDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class BlogDeleteView(LoginRequiredMixin,  DeleteView):
     model = Blog
     success_url = reverse_lazy('main:blog_list')
 

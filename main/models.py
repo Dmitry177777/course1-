@@ -52,10 +52,27 @@ class Message(models.Model):
         verbose_name = 'Сообщение'
         verbose_name_plural = 'Сообщения'
 
+class MailingSetting(models.Model):
+    email = models.ManyToManyField(Client, on_delete=models.CASCADE, null=False,  verbose_name='почта_пользователя')
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    status_mailing = models.BooleanField(default=False, verbose_name='Статус рассылки') # завершена, создана, запущена
+    head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150,  default='сообщение', verbose_name='Тема сообщения')
+
+
+    class Meta:
+        verbose_name = 'Настройка рассылки'
+        verbose_name_plural = 'Настройки рассылки'
+
+    def __str__(self):
+        return f'{self.email} : {self.start_time} : {self.end_time} '
+
+
+
 class MailingLogs(models.Model):
 
     id = models.BigAutoField(primary_key=True)
-    email = models.EmailField(verbose_name='почта')
+    email = models.ForeignKey (MailingSetting, verbose_name='почта')
     head_message = models.CharField(max_length=150, default=7, verbose_name='Тема сообщения')
     log_time = models.DateTimeField() # дата и время последней попытки
     status_mailing = models.BooleanField(default=False, verbose_name='Статус попытки')  # завершена, создана, запущена
@@ -73,23 +90,7 @@ class IterRegistry(type):
         return iter(cls._registry)
 
 
-class MailingSetting(models.Model):
-    email = models.OneToOneField(Client, on_delete=models.CASCADE, null=False,  verbose_name='почта_пользователя')
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
-    status_mailing = models.BooleanField(default=False, verbose_name='Статус рассылки') # завершена, создана, запущена
-    head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150,  default='сообщение', verbose_name='Тема сообщения')
 
-
-
-
-
-    class Meta:
-        verbose_name = 'Настройка рассылки'
-        verbose_name_plural = 'Настройки рассылки'
-
-    def __str__(self):
-        return f'{self.email} : {self.start_time} : {self.end_time} '
 
 
 
