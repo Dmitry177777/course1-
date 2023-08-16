@@ -2,7 +2,7 @@ import random
 from django import forms
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.forms import inlineformset_factory
+from django.forms import inlineformset_factory, modelformset_factory, modelform_factory
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -193,7 +193,7 @@ class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         else:
             if self.request.user.is_superuser or self.object.email == self.request.user.email: # проверка пользователя на автора или суперюзера
                 context_data = super().get_context_data(**kwargs)
-                MessageFormset = inlineformset_factory(MailingSetting, MailingLogs, form=MailingSettingForm, extra=2)
+                MessageFormset = modelform_factory(MailingSetting, form=ClientForm )
                 if self.request.method == 'POST':
                     context_data['formset'] = MessageFormset(self.request.POST, instance=self.object) # Обработка и сохранение POST запроса если он есть
                 else:
