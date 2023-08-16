@@ -193,7 +193,7 @@ class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         else:
             if self.request.user.is_superuser or self.object.email == self.request.user.email: # проверка пользователя на автора или суперюзера
                 context_data = super().get_context_data(**kwargs)
-                MessageFormset = modelform_factory(MailingSetting, form=ClientForm )
+                MessageFormset = inlineformset_factory(Client,Message, form=ClientForm )
                 if self.request.method == 'POST':
                     context_data['formset'] = MessageFormset(self.request.POST, instance=self.object) # Обработка и сохранение POST запроса если он есть
                 else:
