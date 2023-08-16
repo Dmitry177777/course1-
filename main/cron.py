@@ -30,29 +30,29 @@ def send_mail_():
         print(client_m)
 
 
-        # now_w=datetime.datetime.now().replace(tzinfo=pytz.utc)
-        # start_time = mailSet_m.start_time.replace(tzinfo=pytz.utc)
-        # end_time = mailSet_m.end_time.replace(tzinfo=pytz.utc)
-        #
+        now_w=datetime.datetime.now().replace(tzinfo=pytz.utc)
+        start_time = mailSet_m.start_time.replace(tzinfo=pytz.utc)
+        end_time = mailSet_m.end_time.replace(tzinfo=pytz.utc)
 
 
 
-        # if start_time <= now_w <= end_time:
-        response = send_mail(
-            mailSet_m.head_message,
-            message_m.body_message,
-            settings.EMAIL_HOST_USER,
-            [client_m],
-        fail_silently = False,
-        )
 
-        log_m = MailingLogs()
-        log_m.email_id = mailSet_m.id
-        log_m.head_message = mailSet_m.head_message
-        log_m.log_time = datetime.datetime.now()
-        log_m.status_mailing = True
-        log_m.get_server_mail = response
-        log_m.save()
+        if start_time <= now_w <= end_time:
+            response = send_mail(
+                mailSet_m.head_message,
+                message_m.body_message,
+                settings.EMAIL_HOST_USER,
+                [client_m],
+            fail_silently = False,
+            )
+
+            log_m = MailingLogs()
+            log_m.email_id = mailSet_m.id
+            log_m.head_message = mailSet_m.head_message
+            log_m.log_time = datetime.datetime.now()
+            log_m.status_mailing = True
+            log_m.get_server_mail = response
+            log_m.save()
 
 
 
