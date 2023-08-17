@@ -264,13 +264,13 @@ class BlogDetailView(LoginRequiredMixin, DetailView):
 
 class BlogCreateView(LoginRequiredMixin,  CreateView):
     model = Blog
-    fields = ('message_heading', 'message_content', 'message_preview', 'is_publication',)
+    fields = ('email', 'message_heading', 'message_content', 'message_preview', 'is_publication',)
     success_url = reverse_lazy('main:blog_list')
 
 
 class BlogUpdateView(LoginRequiredMixin,  UpdateView):
     model = Blog
-    fields = ('message_heading', 'message_content', 'message_preview', 'is_publication',)
+    fields = ('email', 'message_heading', 'message_content', 'message_preview', 'is_publication',)
 
     # Получаем данные объекта и выводим ту же страницу
     def get_success_url(self) -> str:
