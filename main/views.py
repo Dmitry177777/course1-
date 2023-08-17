@@ -94,13 +94,13 @@ class MailingSettingUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Upda
         else:
             if self.request.user.is_superuser or self.object.email == self.request.user.email:  # проверка пользователя на автора или суперюзера
                 context_data = super().get_context_data(**kwargs)
-                # MailingLogsFormset = inlineformset_factory(MailingSetting, MailingLogs, form=MailingLogsForm, extra=1)
-                # if self.request.method == 'POST':
-                #     context_data['formset'] = MailingLogsFormset(self.request.POST,
-                #                                              instance=self.object)  # Обработка и сохранение POST запроса если он есть
-                # else:
-                #     context_data['formset'] = MailingLogsFormset(instance=self.object)
-                #     # Обработка ошибки не авторизованных пользователей
+                MailingLogsFormset = inlineformset_factory(MailingSetting, MailingLogs, form=MailingLogsForm, extra=1)
+                if self.request.method == 'POST':
+                    context_data['formset'] = MailingLogsFormset(self.request.POST,
+                                                             instance=self.object)  # Обработка и сохранение POST запроса если он есть
+                else:
+                    context_data['formset'] = MailingLogsFormset(instance=self.object)
+                    # Обработка ошибки не авторизованных пользователей
 
             else:
                 raise BaseException("Вы не автор. Вы не администратор.")
