@@ -73,7 +73,7 @@ class MailingSettingCreateView(LoginRequiredMixin, PermissionRequiredMixin, Crea
 
     def form_valid(self, form):
 
-        form.instance.email = self.request.user.email  # запись авторизованного пользователя в шаблон
+        # form.instance.email = self.request.user.email  # запись авторизованного пользователя в шаблон
         form.save()
         return super().form_valid(form)
 

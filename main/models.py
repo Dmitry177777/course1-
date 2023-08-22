@@ -56,7 +56,7 @@ class MailingSetting(models.Model):
     email = models.ManyToManyField(Client,  verbose_name='почта_пользователя') #on_delete=models.CASCADE,
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    status_mailing = models.BooleanField(default=False, verbose_name='Статус рассылки') # завершена, создана, запущена
+    status_mailing = models.BooleanField(default=True, verbose_name='Статус рассылки') # завершена, создана, запущена
     head_message = models.OneToOneField(Message, on_delete=models.CASCADE, max_length=150,  default='сообщение', verbose_name='Тема сообщения')
 
 
